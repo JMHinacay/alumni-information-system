@@ -1,0 +1,7 @@
+.bgWrap {
+  position: fixed !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
+}

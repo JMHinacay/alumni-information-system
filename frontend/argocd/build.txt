@@ -1,0 +1,10 @@
+
+
+docker build -t docker.ace-mc-bohol.com/hrpayroll:staging-1.0.007 .
+docker push docker.ace-mc-bohol.com/hrpayroll:staging-1.0.007
+
+
+https://askubuntu.com/questions/1296892/snap-edit-docker-configuration
+https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/
+https://www.digitalocean.com/community/questions/how-to-set-up-nginx-ingress-for-load-balancers-with-proxy-protocol-support
+test

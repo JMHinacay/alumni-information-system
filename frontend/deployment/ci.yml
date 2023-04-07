@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: hisd3mk2hr-template
+  group: hisd3mk2hr
+metadata:
+  annotations:
+    iconClass: icon-spring
+    tags: oasisanalytics
+  name: hisd3mk2hr
+message: "Welcome to HISD3MK2 Back Office Setup Configuration"
+objects:
+
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      name: hisd3mk2hr-pipeline
+      creationTimestamp: null
+      labels:
+        app: hisd3mk2hr
+    spec:
+      triggers: []
+      runPolicy: Serial
+      source:
+        type: Git
+        git:
+          uri: 'https://github.com/hisd3/hisd3-monorepo.git'
+          ref: master
+        sourceSecret:
+          name: "acegithub"
+      strategy:
+        type: JenkinsPipeline
+        jenkinsPipelineStrategy:
+          jenkinsfilePath: hrpayroll/Jenkinsfile
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: hisd3mk2hr-service
+    spec:
+      type: ClusterIP
+      ports:
+        - name: http
+          port: 80
+          targetPort: 20000
+          protocol: TCP
+      selector:
+        app: hisd3mk2hr-deploy
+
+  - apiVersion: v1
+    kind: DeploymentConfig
+    metadata:
+      name: hisd3mk2hr-deploy
+      labels:
+        app: hisd3mk2hr-deploy
+    spec:
+      replicas: 1
+      selector:
+        app: hisd3mk2hr-deploy
+      triggers:
+        - type: "ConfigChange"
+        - imageChangeParams:
+            automatic: true
+            containerNames:
+              - "hisd3mk2hr-deploy"
+            from:
+              kind: "ImageStreamTag"
+              name: "hisd3mk2hr:latest"
+          type: "ImageChange"
+
+      template:
+        metadata:
+          labels:
+            app: hisd3mk2hr-deploy
+        spec:
+          containers:
+            - name: hisd3mk2hr-deploy
+              image: hisd3mk2hr:latest
+              ports:
+                - containerPort: 20000
+              readinessProbe:
+                httpGet:
+                  path: /
+                  port: 20000
+                  httpHeaders:
+                    - name: X-Custom-Header
+                      value: Awesome
+                initialDelaySeconds: 15
+                periodSeconds: 15
+                successThreshold: 1
+                timeoutSeconds: 20
+              livenessProbe:
+                httpGet:
+                  path: /
+                  port: 20000
+                  httpHeaders:
+                    - name: X-Custom-Header
+                      value: Awesome
+                initialDelaySeconds: 15
+                periodSeconds: 15
+                successThreshold: 1
+                timeoutSeconds: 20
+

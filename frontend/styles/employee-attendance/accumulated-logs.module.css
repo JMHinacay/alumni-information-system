@@ -1,0 +1,42 @@
+tbody > tr:hover > td.absent {
+  background-color: rgb(212, 66, 64) !important;
+  border-right-color: rgb(212, 66, 64) !important;
+  border-right-width: 0px !important;
+  color: white;
+}
+
+tbody > tr > td.absent {
+  background-color: rgb(235, 77, 75) !important;
+  border-right-color: rgb(235, 77, 75) !important;
+  border-right-width: 0px !important;
+  color: white;
+}
+
+td.with-hours {
+  background-color: #27ae60 !important;
+  color: white;
+}
+td.with-hours:hover {
+  background-color: #229c55 !important;
+  color: white;
+}
+td.with-hours-red {
+  background-color: #e74c3c !important;
+  color: white;
+}
+td.with-hours:hover-red {
+  background-color: #cc4233 !important;
+  color: white;
+}
+
+/* tbody > tr:hover > td.overtime {
+  background-color: rgba(46, 204, 113, 0.2) !important;
+}
+
+tbody > tr > td.overtime {
+  background-color: rgba(46, 204, 113, 0.3) !important;
+} */
+
+/* .ant-table-tbody > tr.ant-table-row:hover > td.absent {
+  background-color: green !important;
+} */

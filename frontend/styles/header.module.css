@@ -1,0 +1,5 @@
+.header-transition {
+  transition: left 0.2s;
+  transition-timing-function: ease;
+  z-index: 1;
+}

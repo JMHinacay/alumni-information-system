@@ -1,0 +1,41 @@
+.event-regular {
+  background-color: #3498db;
+  padding: 0 5px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.event-special {
+  background-color: #1abc9c;
+  padding: 0 5px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.event-non-holiday {
+  background-color: #34495e;
+  padding: 0 5px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.event-regular.fixed {
+  border-left-width: 5px;
+  border-color: red;
+  border-left-style: solid;
+}
+
+.event-special.fixed {
+  border-left-width: 5px;
+  border-color: red;
+  border-left-style: solid;
+}
+
+.event-non-holiday.fixed {
+  border-left-width: 5px;
+  border-color: red;
+  border-left-style: solid;
+}

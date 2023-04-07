@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrdemo
+  namespace: hrdemo
+  labels:
+    app: hrdemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hrdemo
+  template:
+    metadata:
+      labels:
+        app: hrdemo
+    spec:
+      imagePullSecrets:
+        - name: docker-ace
+      containers:
+        - name: hrdemo
+          image: docker.ace-mc-bohol.com/hrdemo:3.0.32
+          ports:
+            - containerPort: 20000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hrdemo
+  namespace: hrdemo
+  labels:
+    app: hrdemo
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 20000
+      name: hrdemo
+  selector:
+    app: hrdemo
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lanexbot-ingress
+  namespace: hrdemo
+  annotations:
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+spec:
+  tls:
+    - hosts:
+        - demo-hr.ace-mc-bohol.com
+      secretName: hrdemo-tls-secret
+  rules:
+    - host: demo-hr.ace-mc-bohol.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: '/'
+            backend:
+              service:
+                name: hrdemo
+                port:
+                  number: 20000
