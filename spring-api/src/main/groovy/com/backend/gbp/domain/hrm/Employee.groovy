@@ -3,9 +3,6 @@ package com.backend.gbp.domain.hrm
 import com.backend.gbp.domain.AbstractAuditingEntity
 import com.backend.gbp.domain.Office
 import com.backend.gbp.domain.Position
-import com.backend.gbp.domain.address.Barangay
-import com.backend.gbp.domain.address.City
-import com.backend.gbp.domain.address.Province
 import com.backend.gbp.domain.types.JaversResolvable
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.backend.gbp.domain.User
@@ -114,23 +111,6 @@ class Employee extends AbstractAuditingEntity implements JaversResolvable,Serial
 	@Column(name = "barangay", columnDefinition = "varchar")
 	String barangay
 
-
-
-//	@NotFound(action = NotFoundAction.IGNORE)
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "barangay", referencedColumnName = "id")
-//	Barangay barangay
-//
-//	@NotFound(action = NotFoundAction.IGNORE)
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "city", referencedColumnName = "id")
-//	City city
-//
-//	@NotFound(action = NotFoundAction.IGNORE)
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "province", referencedColumnName = "id")
-//	Province province
-
 	@GraphQLQuery
 	@Column(name = "zipcode", columnDefinition = "varchar")
 	String zipCode
@@ -208,12 +188,8 @@ class Employee extends AbstractAuditingEntity implements JaversResolvable,Serial
 	@Formula("concat(first_name , coalesce(' ' || nullif(middle_name,'') , ''), coalesce(' ' || nullif(last_name,'') , ''), coalesce(' ' || nullif(name_suffix,'') , ''), coalesce(', ' || nullif(title_initials,'') , ''))")
 	String fullnameWithTitle
 
-//	@GraphQLQuery
-//	@Formula("concat(street , coalesce(' ' || nullif(barangay,'') , ''), coalesce(' ' || nullif(municipality,'') , ''), coalesce(', ' || nullif(province,'') , ''), coalesce(', ' || nullif(country,'') , ''), coalesce(', ' || nullif(zipcode,'') , ''))")
-//	String fullAddress
-
 	@GraphQLQuery
-	@Column(name = "full_address", columnDefinition = "varchar")
+	@Formula("concat(street , coalesce(' ' || nullif(barangay,'') , ''), coalesce(' ' || nullif(municipality,'') , ''), coalesce(', ' || nullif(province,'') , ''), coalesce(', ' || nullif(country,'') , ''), coalesce(', ' || nullif(zipcode,'') , ''))")
 	String fullAddress
 
 	@Override

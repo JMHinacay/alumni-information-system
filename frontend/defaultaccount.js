@@ -1,2 +1,2 @@
 export let username = 'admin';
-export let password = 'vAoNeMx2';
+export let password = 'i5BkE26J';

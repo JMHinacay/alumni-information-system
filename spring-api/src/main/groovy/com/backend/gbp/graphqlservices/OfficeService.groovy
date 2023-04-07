@@ -58,14 +58,7 @@ class OfficeService {
 
     @GraphQLQuery(name = "officeById", description = "Get Office By Id")
     Office findById(@GraphQLArgument(name = "id") UUID id) {
-        if(id)
-        {
-          return  officeRepository.findById(id).get()
-        }
-        else{
-            return null
-        }
-//        return id ? officeRepository.findById(id).get() : null
+        return id ? officeRepository.findById(id).get() : null
     }
 
 	//============== All Mutations ====================

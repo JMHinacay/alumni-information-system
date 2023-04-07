@@ -41,9 +41,4 @@ class City {
     String getCityName() {
         return StringUtils.defaultString(name.toUpperCase())
     }
-
-    @Transient
-    String getProvinceId() { //serviceName
-        return province.id
-    }
 }

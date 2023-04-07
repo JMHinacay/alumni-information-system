@@ -1,12 +1,10 @@
 package com.backend.gbp.domain
 
-import com.backend.gbp.rest.dto.DefaultRolesDto
-import com.backend.gbp.rest.dto.UploadFilesDto
+
 import groovy.transform.TypeChecked
 import io.leangen.graphql.annotations.GraphQLQuery
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Type
-import org.json.JSONArray
 
 import javax.persistence.*
 
@@ -39,19 +37,5 @@ class Position extends AbstractAuditingEntity { //domain is connected ni sa tabl
 	@GraphQLQuery
 	@Column(name = "status", columnDefinition = "bool")
 	Boolean status
-
-//	@GraphQLQuery
-//	@Column(name = "default_roles", columnDefinition = "jsonb")
-//	DefaultRolesDto defaultRoles
-
-	@GraphQLQuery
-	@Type(type = "jsonb")
-	@Column(name="default_roles",columnDefinition = "jsonb")
-	List<String >defaultRoles
-
-	@GraphQLQuery
-	@Type(type = "jsonb")
-	@Column(name="default_permissions",columnDefinition = "jsonb")
-	List<String >defaultPermissions
 
 }

@@ -24,14 +24,6 @@ const AuthManager = (props) => {
             access
             roles
           }
-          department {
-            id
-            departmentName
-          }
-          departmentOfDuty {
-            id
-            departmentName
-          }
         }
       }
     `,

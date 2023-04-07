@@ -6,7 +6,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
 group = 'com.hisd3'
-version = '3.0.86'
+version = '3.1.22'
 sourceCompatibility = '1.8'
 repositories {
 

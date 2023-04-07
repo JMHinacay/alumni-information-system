@@ -27,14 +27,6 @@ const profilePage = () => {
             access
             roles
           }
-          department {
-            id
-            departmentName
-          }
-          departmentOfDuty {
-            id
-            departmentName
-          }
         }
       }
     `,

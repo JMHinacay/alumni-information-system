@@ -6,8 +6,6 @@ import com.backend.gbp.domain.Permission
 import com.backend.gbp.domain.PersistentToken
 import com.backend.gbp.domain.User
 import com.backend.gbp.domain.hrm.Employee
-import com.backend.gbp.domain.lot.LotTransaction
-import com.backend.gbp.graphqlservices.types.GraphQLRetVal
 import com.backend.gbp.repository.UserRepository
 import com.backend.gbp.repository.hrm.EmployeeRepository
 import com.backend.gbp.security.SecurityUtils
@@ -17,13 +15,9 @@ import io.leangen.graphql.annotations.GraphQLMutation
 import io.leangen.graphql.annotations.GraphQLQuery
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi
 import org.apache.commons.lang3.RandomStringUtils
-import org.apache.logging.log4j.core.util.PasswordDecryptor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
-
-import javax.transaction.Transactional
-import java.time.Instant
 
 //@TypeChecked
 @Component
@@ -41,10 +35,6 @@ class UserService {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder
-
-
-
-
 	//============== All Queries ====================
 	
 	@GraphQLMutation
@@ -63,36 +53,14 @@ class UserService {
 	String changePassword(@GraphQLArgument(name = "username") String username) {
 		String tempPassword = RandomStringUtils.random(8, true, true)
 		User user = userRepository.findOneByLogin(username)
-
+		
 		user.password = passwordEncoder.encode(tempPassword)
 		user.activated = false
-
+		
 		userRepository.save(user)
 		return tempPassword
 	}
-
-
-	@GraphQLMutation(name = "newPassword")
-	@Transactional
-	GraphQLRetVal<String> newPassword(
-			@GraphQLArgument(name = "userId") Long userId,
-			@GraphQLArgument(name = "oldPassword") String oldPassword,
-			@GraphQLArgument(name = "newPassword") String newPassword
-	) {
-		User user = userRepository.findById(userId).get()
-//		println(password
-		if(passwordEncoder.matches(oldPassword, user.password)){
-			user.password = passwordEncoder.encode(newPassword)
-			userRepository.save(user)
-			return new GraphQLRetVal<String>("Success", true, "Password change successfully")
-		}else{
-			return new GraphQLRetVal<String>("Success", false, "Your old password is  incorrect!")
-		}
-	}
-
-
-
-
+	
 	@GraphQLQuery(name = "account", description = "Get User by login")
 	Employee findOneByLogin() {
 		User user = userRepository.findOneByLogin(SecurityUtils.currentLogin())
@@ -142,8 +110,4 @@ class UserService {
 	Boolean isLoginUnique(@GraphQLArgument(name = "login") String login) {
 		return !userRepository.findOneByLogin(login.toLowerCase())
 	}
-
-
-	//=======================MICHAEL QUERIES==============================
-
 }

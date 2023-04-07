@@ -1,6 +1,6 @@
 package com.backend.gbp.domain
 
-import com.backend.gbp.domain.lot.Claimant
+
 import groovy.transform.TypeChecked
 import io.leangen.graphql.annotations.GraphQLQuery
 import org.hibernate.annotations.Formula
@@ -79,6 +79,4 @@ class Office extends AbstractAuditingEntity {
 	@Formula("concat(office_street , coalesce(' ' || nullif(office_barangay,'') , ''), coalesce(', ' || nullif(office_municipality,'') , ''), coalesce(', ' || nullif(office_province,'') , ''), coalesce(' ' || nullif(office_country,'') , ''), coalesce(' ' || nullif(office_zipcode,'') , ''))")
 	String fullAddress
 
-	@OneToMany(mappedBy = "office", orphanRemoval = true, cascade = CascadeType.ALL)
-	List<Jurisdiction> jurisdictions = []
 }

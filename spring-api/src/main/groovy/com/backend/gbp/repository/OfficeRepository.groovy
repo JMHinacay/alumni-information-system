@@ -24,7 +24,4 @@ interface OfficeRepository extends JpaRepository<Office, UUID> {
 			value = '''Select o from Office o where o.status = true'''
 	)
 	List<Office> activeOffices()
-
-	@Query(value = """Select j.id from Office j""")
-	List<UUID> getOfficeIds()
 }

@@ -1,20 +1,10 @@
 package com.backend.gbp.graphqlservices.hrm
 
-import com.backend.gbp.domain.SurveyTeamMember
-import com.backend.gbp.domain.UserActivity
-import com.backend.gbp.domain.lot.LotInfo
-import com.backend.gbp.graphqlservices.SurveyTeamMemberService
-import com.backend.gbp.graphqlservices.types.GraphQLRetVal
 import com.backend.gbp.repository.AuthorityRepository
 import com.backend.gbp.repository.OfficeRepository
 import com.backend.gbp.repository.PermissionRepository
 import com.backend.gbp.repository.PositionRepository
-import com.backend.gbp.repository.SurveyTeamMemberRepository
-import com.backend.gbp.repository.SurveyTeamRepository
 import com.backend.gbp.repository.UserRepository
-import com.backend.gbp.repository.address.BarangayRepository
-import com.backend.gbp.repository.address.CityRepository
-import com.backend.gbp.repository.address.ProvinceRepository
 import com.backend.gbp.repository.hrm.EmployeeRepository
 import com.backend.gbp.services.GeneratorService
 import com.backend.gbp.services.GeneratorType
@@ -51,9 +41,6 @@ class EmployeeService {
     private EmployeeRepository employeeRepository
 
     @Autowired
-    private SurveyTeamMemberRepository surveyTeamMemberRepository
-
-    @Autowired
     OfficeRepository officeRepository
 
     @Autowired
@@ -75,21 +62,9 @@ class EmployeeService {
     PermissionRepository permissionRepository
 
     @Autowired
-    BarangayRepository barangayRepository
-
-    @Autowired
-    CityRepository cityRepository
-
-    @Autowired
-    ProvinceRepository provinceRepository
-
-    @Autowired
-    SurveyTeamMemberService surveyTeamMemberService
-
-    @Autowired
     AuthorityRepository authorityRepository
 
-    //============================================================All Queries ============================================================
+    //============== All Queries ====================
 
     @GraphQLQuery(name = "employees", description = "Get All Employees")
     List<Employee> findAll() {
@@ -144,82 +119,25 @@ class EmployeeService {
         return id ? employeeRepository.findById(id).get() : null
     }
 
-
-    @GraphQLQuery(name = "employeeActive", description = "Get Employee By Id")
-    List<Employee> findById() {
-
-        return employeeRepository.getActive()
-    }
-
-    @GraphQLQuery(name = "employeeNotSurveyTeam", description = "Get Employee By Id")
-    List<Employee> employeeNotSurveyTeam(@GraphQLArgument(name = "ids") List<UUID> ids) {
-    if(!ids){
-        return employeeRepository.findAll()
-
-        println("nisud sa not survey team member")
-    }else{
-        return employeeRepository.findEmployeesNotSurveyTeamMember(ids)
-
-    }
-    }
-
-
-    @GraphQLQuery(name = "employeeByPositionOffice", description = "Get Employee By Office and Position")
-    List<Employee> employeeByPositionOffice(@GraphQLArgument(name = "positionId") UUID positionId,
-                                      @GraphQLArgument(name = "officeId") UUID officeId) {
-
-        if(!officeId){
-            return employeeRepository.findByPosition(positionId)
-
-        }
-        else if(!positionId ){
-            return employeeRepository.findByOffice(officeId)
-
-        }else if(officeId && positionId){
-            return employeeRepository.findByPositionOffice(officeId, positionId)
-
-        }else if (!officeId && !positionId){
-            return employeeRepository.findAll()
-        }
-    }
-
-    //============================================================ All Mutations ============================================================
+    //============== All Mutations ====================
 
     @GraphQLMutation
     @Transactional
-    GraphQLRetVal<Employee> upsertEmployee(
+    Employee upsertEmployee(
             @GraphQLArgument(name = "id") UUID id,
             @GraphQLArgument(name = "fields") Map<String, Object> fields,
             @GraphQLArgument(name = "authorities") Set<String> authorities,
             @GraphQLArgument(name = "permissions") Set<String> permissions,
             @GraphQLArgument(name = "officeId") UUID officeId,
-            @GraphQLArgument(name = "position") UUID position,
-            @GraphQLArgument(name = "isSurveyTeam") Boolean isSurveyTeam
-
+            @GraphQLArgument(name = "position") UUID position
     ) {
         if (id) {
             Employee employee = employeeRepository.findById(id).get()
             objectMapper.updateValue(employee, fields)
             User user = new User()
 
-            //====save full address as string=========
-            Employee obj = objectMapper.convertValue(fields, Employee.class)
-            def province = provinceRepository.findById(UUID.fromString(obj.stateProvince)).get()
-            def city = cityRepository.findById(UUID.fromString(obj.cityMunicipality)).get()
-            def barangay = barangayRepository.findById(UUID.fromString(obj.barangay)).get()
-            employee.fullAddress = employee.street + ", " + barangay.barangayName + ", " + city.cityName + ", " + province.provinceName
-
             if (!employee.user) {
                 if (fields.get("login") && fields.get("password")) {
-
-                    //check for conflict usernames
-                    String newLogin = fields.get("login")
-                    def res = userRepository.findOneByLogin(newLogin)
-                    if (res) {
-                        return new GraphQLRetVal<Employee>(null, false, "Username already exists!")
-                    }
-
-
                     user.login = fields["login"].toString().toLowerCase()
                     user.password = passwordEncoder?.encode(fields["password"] as String)
                     user.firstName = fields["firstName"]
@@ -237,7 +155,6 @@ class EmployeeService {
 
             if (employee.user && employee.user.id) {
                 // make sure that user is created above and monitored by hibernate
-
 
                 employee.user.authorities.clear()
                 if (authorities) {
@@ -265,17 +182,10 @@ class EmployeeService {
             employee.office = officeRepository.findById(officeId).get()
             employee.position = positionRepository.findById(position).get()
             employee.dob = employee.dob.plusDays(1)
-            employee = employeeRepository.save(employee)
-            return new GraphQLRetVal<Employee>(employee, true, "Changes Saved")
 
+            return employeeRepository.save(employee)
         } else {
             Employee employee = objectMapper.convertValue(fields, Employee)
-
-            //====save full address as string=========
-            def province = provinceRepository.findById(UUID.fromString(employee.stateProvince)).get()
-            def city = cityRepository.findById(UUID.fromString(employee.cityMunicipality)).get()
-            def barangay = barangayRepository.findById(UUID.fromString(employee.barangay)).get()
-            employee.fullAddress = employee.street + ", " + barangay.barangayName + ", " + city.cityName + ", " + province.provinceName
 
             employee.isActive = true
             employee.office = officeRepository.findById(officeId).get()
@@ -285,12 +195,8 @@ class EmployeeService {
             employee.employeeNo = "EMP" + generatorService.getNextValue(GeneratorType.EMPLOYEE_NO) { Long no ->
                 StringUtils.leftPad(no.toString(), 6, "0")
             }
-            employee = employeeRepository.save(employee)
 
-            if(isSurveyTeam){
-                surveyTeamMemberService.upsertSurveyTeamMember(employee.id, true)
-            }
-            return new GraphQLRetVal<Employee>(employee, true, "Changes Saved")
+            return employeeRepository.save(employee)
         }
     }
 

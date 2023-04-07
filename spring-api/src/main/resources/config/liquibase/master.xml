@@ -26,5 +26,27 @@
     <!--  atoa nani code sa ubos  -->
     <include file="classpath:config/liquibase/changelog1/1_drop_not_nedeed_schema.sql"
              relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/2_create_position_and_office_setup.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/3_create_employee_setup.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/4_sample_data.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/5_permission.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/6_notif.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/7_addresses.sql"
+             relativeToChangelogFile="false"/>
+<!--    <include file="classpath:config/liquibase/changelog1/8_address_data.sql"-->
+<!--             relativeToChangelogFile="false"/>-->
+    <include file="classpath:config/liquibase/changelog1/9_alter_table_position.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/10_employee_user_set_nullable.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/11_update_default_emp_no.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog1/12_alter_office.sql"
+             relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

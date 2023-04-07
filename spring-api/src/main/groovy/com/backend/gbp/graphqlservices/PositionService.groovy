@@ -1,8 +1,7 @@
 package com.backend.gbp.graphqlservices
 
-import com.backend.gbp.domain.DenrUpdates
+
 import com.backend.gbp.domain.Position
-import com.backend.gbp.graphqlservices.types.GraphQLRetVal
 import com.backend.gbp.repository.PositionRepository
 import com.backend.gbp.services.GeneratorService
 import com.backend.gbp.services.GeneratorType
@@ -13,7 +12,6 @@ import io.leangen.graphql.annotations.GraphQLMutation
 import io.leangen.graphql.annotations.GraphQLQuery
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi
 import org.apache.commons.lang3.StringUtils
-import org.json.JSONArray
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -51,9 +49,9 @@ class PositionService {
             @GraphQLArgument(name = "filter") String filter,
             @GraphQLArgument(name = "status") Boolean status
     ) {
-        if (status != null) {
-            positionRepository.positionFilterStatus(filter, status).sort { it.code }
-        } else {
+        if(status != null){
+            positionRepository.positionFilterStatus(filter,status).sort { it.code }
+        }else{
             positionRepository.positionFilter(filter).sort { it.code }
         }
 
@@ -65,47 +63,28 @@ class PositionService {
         positionRepository.activePositions().sort { it.code }
     }
 
-    //============== All Mutations ====================
+	//============== All Mutations ====================
     @GraphQLMutation(name = "upsertPosition")
     @Transactional
-    GraphQLRetVal<Position> upsertPosition(
+    Position upsertPosition(
             @GraphQLArgument(name = "id") UUID id,
-            @GraphQLArgument(name = "fields") Map<String, Object> fields,
-            @GraphQLArgument(name = "authorities") List<String> authorities,
-            @GraphQLArgument(name = "permissions") List<String> permissions
-
-
+            @GraphQLArgument(name = "fields") Map<String, Object> fields
     ) {
+        Position op = new Position()
         def obj = objectMapper.convertValue(fields, Position.class)
-
-        List<Position> duplicate = null
-        duplicate = positionRepository.positinByDescription(obj.description)
-        if (duplicate) {
-            return new GraphQLRetVal<Position>(null, false, "Duplicate position name exists.")
+        if(id){
+            op = positionRepository.findById(id).get()
         }
-
-        Position position = new Position()
-        if (id) {
-            position = positionRepository.findById(id).get()
-
-
-        }
-        if (!id) {
-            position.code = "POS" + generatorService.getNextValue(GeneratorType.POSITION) { Long no ->
+        if(!id){
+            op.code = "POS" + generatorService.getNextValue(GeneratorType.POSITION) { Long no ->
                 StringUtils.leftPad(no.toString(), 6, "0")
             }
         }
-        position.flagValue = obj.flagValue
-        position.description = obj.description
-        position.status = obj.status
-//        position.defaultRoles.roles = authorities
-        position.defaultRoles = authorities
-        position.defaultPermissions = permissions
+        op.flagValue = obj.flagValue
+        op.description = obj.description
+        op.status = obj.status
 
-        position = positionRepository.save(position)
-
-        return new GraphQLRetVal<Position>(position, true, "Position successfully saved.")
-
+        positionRepository.save(op)
     }
 
 }

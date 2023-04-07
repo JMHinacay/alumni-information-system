@@ -41,6 +41,7 @@ const MyLoginForm = () => {
         // }
       })
       .catch((error) => {
+        console.log(error);
         if (error?.response?.status === 401)
           message.error('Wrong username and password. Please try again.');
         else message.error('Failed to login. Please try again later.');

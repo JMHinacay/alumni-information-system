@@ -2,7 +2,6 @@ package com.backend.gbp.graphqlservices
 
 
 import com.backend.gbp.domain.Permission
-import com.backend.gbp.repository.PermissionRepository
 import groovy.transform.TypeChecked
 import io.leangen.graphql.annotations.GraphQLQuery
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component
 class PermissionService {
 	
 	@Autowired
-	private PermissionRepository permissionRepository
+	private com.backend.gbp.repository.PermissionRepository permissionRepository
 	
 	//============== All Queries ====================
 	

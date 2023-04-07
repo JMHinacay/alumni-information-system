@@ -41,24 +41,9 @@ class Barangay {
     @JoinColumn(name = "region", referencedColumnName = "id")
     Region region
 
-
-    @Transient
-    String getProvinceName() {
-        return province.provinceName
-    }
-
-    @Transient
-    String getCityName() {
-        return city.cityName
-    }
-
     @Transient
     String getBarangayName() {
         return StringUtils.defaultString(name.toUpperCase())
     }
 
-    @Transient
-    String getCityId() {
-        return city.id
-    }
 }

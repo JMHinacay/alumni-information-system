@@ -24,9 +24,4 @@ interface PositionRepository extends JpaRepository<Position, UUID> {
 			value = '''Select p from Position p where p.status = true'''
 	)
 	List<Position> activePositions()
-
-	@Query(
-			value = '''Select p from Position p where lower(p.description) = lower(:description)'''
-	)
-	List<Position> positinByDescription(@Param("description") String description)
 }

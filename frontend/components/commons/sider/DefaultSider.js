@@ -74,8 +74,8 @@ const DefaultSider = ({ state, toggleCollapsed, setState }) => {
         style={{ marginBottom: 100, overflow: 'hidden' }}
       >
         <Col className={state.collapsed ? 'submenu-title' : ''}>
-          <span style={{ fontSize: '24px' }}>
-            <b>{!state.collapsed ? 'HUMAN RESOURCE' : 'HR'}</b>
+          <span style={{ fontSize: '13px' }}>
+            <b>{!state.collapsed ? 'ALUMNI INFORMATION SYSTEM' : 'AIS'}</b>
           </span>
         </Col>
       </Row>

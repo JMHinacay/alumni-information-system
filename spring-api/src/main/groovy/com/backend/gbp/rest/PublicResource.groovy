@@ -1,8 +1,5 @@
 package com.backend.gbp.rest
 
-import com.backend.gbp.domain.lot.LotTransaction
-import com.backend.gbp.graphqlservices.lot.LotTransactionService
-import com.backend.gbp.repository.lot.LotTransactionRepository
 import com.backend.gbp.rest.dto.PatientBasicDto
 import com.backend.gbp.utils.RequestDumpUtil
 import com.google.gson.Gson
@@ -23,11 +20,9 @@ import org.springframework.messaging.simp.user.SimpUserRegistry
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import javax.servlet.http.HttpServletRequest
-import java.time.Instant
 
 @RestController
 @RequestMapping("/public")
@@ -42,12 +37,6 @@ class PublicResource {
 
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate
-
-    @Autowired
-    LotTransactionRepository lotTransactionRepository
-
-    @Autowired
-    LotTransactionService lotTransactionService
 
     @Autowired
     PasswordEncoder passwordEncoder
@@ -115,41 +104,4 @@ class PublicResource {
         return items
     }
 
-    @RequestMapping(value = "/getLotTransactionByFilter", produces = ["application/json"])
-    LotTransaction getLotTransactionByFilter(
-            @RequestParam("id") String id
-
-    ) {
-//        if (!id || !startDate || !endDate) {
-//            throw new RuntimeException("Failed to get accumulated logs.")
-//        }
-
-//        List<EmployeeAccumulatedAttendanceDto> accumulatedLogs = payrollTimeKeepingCalculatorService.getAccumulatedLogs(id, startDate, endDate)
-        def lotTransaction = lotTransactionService.getTransactionById(UUID.fromString(id))
-        return lotTransaction
-
-    }
-
 }
-
-//@RequestMapping(value = "/getEmployeeByIdNumber", produces = ["application/json"])
-//def getEmployeeByIdNumber(
-//        @RequestParam String id
-//) {
-//    return id ? employeeRepository.findByEmployeeId(id) : null
-//}
-//
-//@RequestMapping(value = "/getEmployeeAccumulatedLogs", produces = ["application/json"])
-//def getEmployeeAccumulatedLogs(
-//        @RequestParam UUID id,
-//        @RequestParam Instant startDate,
-//        @RequestParam Instant endDate
-//) {
-//    if (!id || !startDate || !endDate) {
-//        throw new RuntimeException("Failed to get accumulated logs.")
-//    }
-//
-//    List<EmployeeAccumulatedAttendanceDto> accumulatedLogs = payrollTimeKeepingCalculatorService.getAccumulatedLogs(id, startDate, endDate)
-//
-//    return accumulatedLogs
-//}

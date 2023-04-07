@@ -38,8 +38,6 @@ interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     Page<Employee> searchActiveEmployeesPageable(@Param("filter") String filter, Pageable pageable)
 
 
-
-
     @Query(
             value = "Select e from Employee e where e.user.login = :username"
     )
@@ -53,22 +51,5 @@ interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
     Employee findOneByUser(@Param("user") User user)
 
-    @Query(
-            value = "Select e from Employee e where e.isActive = true"
-    )
-    List<Employee> getActive()
-
-    @Query(value = "Select e from Employee e where e.isActive = true and e.id not in :ids")
-    List<Employee> findEmployeesNotSurveyTeamMember(@Param("ids")List<UUID> ids)
-
-
-    @Query(value = "Select e from Employee e where e.position.id = :positionId and e.user.id IS NOT NULL")
-    List<Employee> findByPosition(@Param("positionId")UUID positionId)
-
-    @Query(value = "Select e from Employee e where e.office.id = :officeId and e.user.id IS NOT NULL")
-    List<Employee> findByOffice(@Param("officeId")UUID officeId)
-
-    @Query(value = "Select e from Employee e where e.position.id = :positionId and e.office.id = :officeId and e.user.id IS NOT NULL")
-    List<Employee> findByPositionOffice(@Param("officeId")UUID officeId, @Param("positionId")UUID positionId)
 
 }
