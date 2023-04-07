@@ -1,0 +1,5 @@
+ALTER TABLE hrm.employees
+ALTER COLUMN province TYPE UUID,
+ALTER COLUMN municipality TYPE UUID ,
+ALTER COLUMN barangay TYPE UUID
+;

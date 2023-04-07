@@ -1,1 +1,0 @@
-ALTER TABLE "billing"."medsupply_cashbasis" ADD COLUMN "processed" boolean;

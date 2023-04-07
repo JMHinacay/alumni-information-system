@@ -1,1 +1,0 @@
-ALTER TABLE inventory.physical_count ADD COLUMN physical_count_transaction uuid default null;

@@ -1,6 +1,0 @@
-https://openshift.tips/
-https://openshift.tips/cleanup/
-oc delete pod --field-selector=status.phase==Succeeded
-oc delete pod --field-selector=status.phase==Failed
-
-https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase

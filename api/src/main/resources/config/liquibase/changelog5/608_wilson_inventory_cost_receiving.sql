@@ -1,1 +1,0 @@
-ALTER TABLE inventory.receiving_report_items ADD COLUMN rec_inventory_cost numeric default 0;

@@ -1,1 +1,0 @@
-ALTER TABLE "inventory"."stock_request" RENAME COLUMN "case" TO "patientCase";

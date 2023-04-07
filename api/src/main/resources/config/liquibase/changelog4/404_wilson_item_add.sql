@@ -1,1 +1,0 @@
-ALTER TABLE inventory.item ADD COLUMN is_life_support bool default false;

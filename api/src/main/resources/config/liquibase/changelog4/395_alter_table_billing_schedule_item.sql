@@ -1,1 +1,0 @@
-ALTER TABLE accounting.billing_schedule_items ADD COLUMN transaction_id uuid;

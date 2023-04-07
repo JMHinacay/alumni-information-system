@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/1_albert_schema_and_patients.sql"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/2_albert__setpasswords.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/3_albert__patientcases.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/4_ace_patient_vitalsigns.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/5_ace_nurse_notes.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/6_ace_intake.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/7_kn4rfy_schema_and_items.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/8_kn4rfy_item_prices.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/8_jp_newtable.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/9_gregg_rename_items.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/9_jp_addautingcolumn.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/10_ace_create_employees.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/11_ace_create_rooms.sql" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/12_kn4rfy_update_employees.sql"
+             relativeToChangelogFile="false"/>
+
+    <!--  atoa nani code sa ubos  -->
+    <include file="classpath:config/liquibase/changelog1/1_drop_not_nedeed_schema.sql"
+             relativeToChangelogFile="false"/>
+
+</databaseChangeLog>

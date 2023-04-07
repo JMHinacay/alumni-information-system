@@ -1,0 +1,9 @@
+--spring.datasource.databaseName=thesis-live
+--accounting.autopostjournal=true
+--accounting.enable_costing=true
+--graphql.compressed=false
+
+
+-Xverify:none
+-noverify
+-XX:TieredStopAtLevel=1

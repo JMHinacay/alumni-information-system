@@ -1,1 +1,0 @@
-insert into t_authority(name) values ('STASH_ACCESS');

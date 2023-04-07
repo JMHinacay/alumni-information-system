@@ -1,1 +1,0 @@
-CREATE INDEX header_ledger_reapply_payment_tracker_idx ON accounting.header_ledger (reapply_payment_tracker);

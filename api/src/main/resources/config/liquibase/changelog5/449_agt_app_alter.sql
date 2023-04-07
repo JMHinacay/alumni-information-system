@@ -1,1 +1,0 @@
-ALTER TABLE appointment.appointment ALTER COLUMN status TYPE bool USING status::bool;

@@ -1,0 +1,1 @@
+ALTER TABLE public.position ADD COLUMN pos_flag_value varchar default null;

@@ -1,1 +1,0 @@
-ALTER TABLE "public"."departments" ADD COLUMN "revenue_tag" varchar;

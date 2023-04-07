@@ -1,1 +1,0 @@
-alter table pms.vaccination rename column vaccianted to vaccinated;

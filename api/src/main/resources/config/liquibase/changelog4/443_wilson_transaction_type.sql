@@ -1,1 +1,0 @@
-ALTER TABLE accounting.transaction_type ALTER COLUMN is_active TYPE bool USING is_active::bool;

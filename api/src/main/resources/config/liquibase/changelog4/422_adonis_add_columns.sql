@@ -1,1 +1,0 @@
-ALTER TABLE accounting.ar_transaction_details ADD COLUMN billing_item_ref_source uuid;

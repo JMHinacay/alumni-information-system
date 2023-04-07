@@ -1,4 +1,0 @@
-drop table hospital_configuration.default_settings;
-
-alter table hospital_configuration.operational_configuration
-add column default_credit_limit numeric;

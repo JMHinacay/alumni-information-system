@@ -1,1 +1,0 @@
-ALTER TABLE accounting.billing_schedule_items ADD COLUMN ar_manual_deductions_id UUID;

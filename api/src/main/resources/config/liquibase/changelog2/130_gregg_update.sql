@@ -1,1 +1,0 @@
-update public.departments set medication_stock_request = true where department_name = 'PHARMACY'

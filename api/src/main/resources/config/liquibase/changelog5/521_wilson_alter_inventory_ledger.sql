@@ -1,1 +1,0 @@
-ALTER TABLE inventory.inventory_ledger ADD COLUMN billing uuid default null, ADD COLUMN billing_item uuid default null;

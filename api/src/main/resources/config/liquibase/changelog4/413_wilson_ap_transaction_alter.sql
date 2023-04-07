@@ -1,1 +1,0 @@
-ALTER TABLE accounting.ap_trans_types ADD COLUMN ap_category varchar default null;

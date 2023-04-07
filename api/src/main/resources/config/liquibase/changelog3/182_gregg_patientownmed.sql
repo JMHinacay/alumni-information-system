@@ -1,1 +1,0 @@
-ALTER TABLE "pms"."patient_own_medicines" RENAME COLUMN "case" TO "patient_case";

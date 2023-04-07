@@ -1,1 +1,0 @@
-ALTER TABLE billing.item_price_controls ALTER COLUMN amount_value TYPE numeric(15,2) USING amount_value::numeric;

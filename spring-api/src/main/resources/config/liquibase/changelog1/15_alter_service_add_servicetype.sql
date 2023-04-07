@@ -1,0 +1,1 @@
+ALTER TABLE public.service ADD COLUMN service_type varchar default null;

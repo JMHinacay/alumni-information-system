@@ -1,1 +1,0 @@
-ALTER TABLE "billing"."billing" RENAME COLUMN "case" TO "patient_case";

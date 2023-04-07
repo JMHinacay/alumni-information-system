@@ -1,1 +1,0 @@
-ALTER TABLE accounting.payables ADD column rounding int default 2;

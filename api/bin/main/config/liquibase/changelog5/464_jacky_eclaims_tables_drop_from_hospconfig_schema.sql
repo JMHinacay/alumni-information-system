@@ -1,2 +1,0 @@
-DROP TABLE IF EXISTS hospital_configuration.eclaims_integration_account;
-DROP TABLE IF EXISTS hospital_configuration.eclaims_integration_settings;

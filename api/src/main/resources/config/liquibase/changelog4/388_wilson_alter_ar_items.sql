@@ -1,1 +1,0 @@
-ALTER TABLE accounting.account_receivable_items ADD COLUMN ap_process bool default false;
