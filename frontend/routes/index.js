@@ -1,27 +1,14 @@
-import React from 'react';
-import { FiUsers } from 'react-icons/fi';
-import { FaFingerprint } from 'react-icons/fa';
-import { MdFingerprint, MdOutlineSecurity } from 'react-icons/md';
 import {
+  StarOutlined,
   SolutionOutlined,
-  AccountBookOutlined,
-  WalletOutlined,
-  CalendarOutlined,
-  FieldTimeOutlined,
-  UserOutlined,
-  ProfileOutlined,
-  SettingOutlined,
-  ContactsOutlined,
-  MoneyCollectOutlined,
-  FileSyncOutlined,
-  RedEnvelopeOutlined,
-  TransactionOutlined,
-  PercentageOutlined,
+  IdcardOutlined,
   LineChartOutlined,
-  LockOutlined,
-  UserSwitchOutlined,
-  SecurityScanOutlined,
+  MessageOutlined,
+  MoneyCollectOutlined,
+  ProfileOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
+import { FiUsers } from 'react-icons/fi';
 
 import { isInAnyRole } from 'components/accessControl/AccessManager';
 
@@ -33,57 +20,44 @@ export const pages = [
     roles: '*',
   },
   {
-    icon: <FiUsers style={{ marginRight: 10 }} className="anticon" />,
-    title: 'Employees',
-    url: '/employees',
-    roles: ['ROLE_ADMIN'],
-    children: [
-      {
-        icon: <UserOutlined />,
-        title: 'List',
-        url: '/list',
-        roles: ['ROLE_ADMIN'],
-      },
-      {
-        icon: <FieldTimeOutlined />,
-        title: 'Attendance',
-        url: '/employee-attendance',
-        roles: ['ROLE_ADMIN'],
-      },
-      {
-        icon: <CalendarOutlined />,
-        title: 'Work Schedule',
-        url: '/work-schedule',
-        roles: ['ROLE_ADMIN'],
-      },
-    ],
+    icon: <MessageOutlined />,
+    title: 'Chats',
+    url: '/chats',
+    roles: '*',
   },
   {
-    icon: <LineChartOutlined />,
+    icon: <ProfileOutlined />,
     title: 'Forum',
     url: '/forum',
     roles: '*',
   },
   {
-    icon: <LineChartOutlined />,
+    icon: <StarOutlined />,
     title: 'Events',
     url: '/events',
     roles: '*',
   },
   {
-    icon: <LineChartOutlined />,
+    icon: <UserOutlined />,
+    title: 'Employees',
+    url: '/employees/list',
+    roles: ['ROLE_ADMIN'],
+  },
+  {
+    icon: <SolutionOutlined />,
+    title: 'Alumni',
+    url: '/alumni',
+    roles: '*',
+  },
+
+  {
+    icon: <MoneyCollectOutlined />,
     title: 'Donations',
     url: '/donations',
     roles: '*',
   },
   {
-    icon: <LineChartOutlined />,
-    title: 'Donations',
-    url: '/chats',
-    roles: '*',
-  },
-  {
-    icon: <LineChartOutlined />,
+    icon: <IdcardOutlined />,
     title: 'Job Hirings',
     url: '/job-hirings',
     roles: '*',

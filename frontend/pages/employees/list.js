@@ -111,13 +111,8 @@ const EmployeeListPage = (props) => {
       },
     },
     {
-      title: 'Department',
-      dataIndex: 'department',
-      render: (dept) => dept?.departmentName || '--',
-    },
-    {
-      title: 'Duty Department',
-      dataIndex: 'departmentOfDuty',
+      title: 'Position',
+      dataIndex: 'position',
       render: (dept) => dept?.departmentName || '--',
     },
     {
@@ -179,7 +174,7 @@ const EmployeeListPage = (props) => {
       </Head>
       <HRPageHeader title="Employee List" />
       <Row type={'flex'} justify={'space-between'} gutter={[8, 8]}>
-        <Col span={12}>
+        <Col span={18}>
           <Input.Search
             style={{ width: '100%' }}
             placeholder="Search Employees"
@@ -189,26 +184,10 @@ const EmployeeListPage = (props) => {
             allowClear
           />
         </Col>
-        <Col span={6}>
-          <HRSelect
-            options={departmentData?.departments.map((item) => {
-              return {
-                value: item.id,
-                label: item.departmentName,
-              };
-            })}
-            placeholder="Search Department"
-            allowClear={true}
-            onChange={(value) => onQueryChange('department', value)}
-            showSearch
-            filterOption={(input, option) =>
-              option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          />
-        </Col>
+
         <Col span={6}>
           <HRButton
-            allowedPermissions={['add_employee']}
+            // allowedPermissions={['add_employee']}
             type={'primary'}
             onClick={addEmployee}
             style={{ width: '100%' }}

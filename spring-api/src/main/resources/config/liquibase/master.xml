@@ -49,4 +49,7 @@
     <include file="classpath:config/liquibase/changelog1/12_alter_office.sql"
              relativeToChangelogFile="false"/>
 
+<!--    alumni tables shit-->
+    <include file="classpath:config/liquibase/changelog1/13_create_initial_tables_for_alumni_system.sql"
+             relativeToChangelogFile="false"/>
 </databaseChangeLog>

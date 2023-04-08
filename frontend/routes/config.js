@@ -6,69 +6,73 @@ export const newConfig = {
   },
   '/migrate-employee-id': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/dashboard': {
     isPublic: false,
-    roles: ['ROLE_USER', 'ROLE_STAFF'],
+    roles: ['ROLE_ADMIN'],
   },
   '/account': {
     isPublic: false,
-    roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_STAFF'],
+    roles: ['ROLE_ADMIN'],
   },
   //====================================EMPLOYEES===================================\\
   '/employees/list': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/employees/employee-attendance': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/employees/employee-attendance/[id]': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/employees/manage/[id]': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/employees/manage': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/employees/salary': {
     isPublic: false,
-    roles: ['HR_ACCESS'],
+    roles: ['ROLE_ADMIN'],
   },
   '/employees/work-schedule': {
     isPublic: false,
-    roles: ['HR_ACCESS', 'WORK_SCHEDULER'],
+    roles: ['ROLE_ADMIN'],
   },
   //====================================EMPLOYEES===================================\\
-  //====================================BIOMETRICS==================================\\
 
-  //====================================BIOMETRICS==================================\\
-  //===================================JOB-OPENING==================================\\
-
-  //===================================JOB-OPENING==================================\\
-  //===================================TRANSACTION==================================\\
-
-  //===================================TRANSACTION==================================\\
-  //==================================CONFIGURATION=================================\\
-
-  //=====================================PAYROLL====================================\\
-  //=====================================ALLOWANCE====================================\\
-
-  //=====================================ALLOWANCE====================================\\
-  //=====================================REPORTS====================================\\
-
-  //=====================================REPORTS====================================\\
-  //====================================ROLES & PERMISSIONS===================================\\
-  // TODO: add roles for roles & permission pages
-
-  //====================================ROLES & PERMISSIONS===================================\\
-  //====================================MY CORNER===================================\\
-
-  //====================================MY CORNER===================================\\
+  '/forum': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
+  '/alumni': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
+  '/events': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
+  '/chats': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
+  '/donations': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
+  '/job-hirings': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
+  '/reports': {
+    isPublic: false,
+    roles: ['ROLE_ADMIN'],
+  },
 };
